@@ -1,5 +1,18 @@
 .App {
-  text-align: center;
+  display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px;
+    padding-top: 1px;
+    padding-left: 380px;
+    display:flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+  .App {
+    flex-direction: column;
+  }
 }
 
 .App-logo {

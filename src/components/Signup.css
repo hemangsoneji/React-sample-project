@@ -1,0 +1,33 @@
+.App {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px;
+    padding-top: 1px;
+    padding-left: 380px;
+    display:flex;
+    flex-direction: row;
+    text-align: center;
+  }
+  
+  @media (max-width: 800px) {
+    .App {
+      flex-direction: column;
+    }
+  }
+  
+  .grid-item{
+    text-align: center;
+  }
+  
+  .logininfo{
+    border-radius: 25px;
+    background: darkslateblue;
+    padding: 0px; 
+    width: 500px;
+    height: 740px;
+  }
+  
+  body{
+    background-color:darkseagreen;
+  }
+  
