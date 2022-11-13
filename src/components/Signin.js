@@ -1,6 +1,7 @@
 import React from 'react';
 import './Signin.css';
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Signin = () => {
   const [email, setEmail] = useState("");
@@ -9,10 +10,7 @@ export const Signin = () => {
   const [allEntry, setAllEntry] = useState([]);
 
   var regEmail = /^[a-zA-Z0-9.!#$%&*+/=?^_{|}]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/;
-  // var regPassword = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
   var regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-
-  let url="Signup.js";
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -32,7 +30,7 @@ export const Signin = () => {
   return (
     <div>
       <div className="grid-item item1"></div>
-      <div className="grid-item logininfo">
+      <div className="grid-item logininfo1">
         <form action="" onSubmit={submitForm}>
           <h1>Sign In</h1>
           <label htmlFor="email">Email:*</label><br></br>
@@ -49,10 +47,10 @@ export const Signin = () => {
           ></input>
           <br></br>
           <br></br>
-          <button type="submit">Submit</button>
+          <button type="submit">Submit <Link to="/enter"></Link></button>
           <br></br>
           <br></br>
-          <h2>Don't have an account? <a href={url}>Sign-Up</a></h2>
+          <h2>Don't have an account? <Link to="/">Signup</Link></h2>
         </form>
       </div>
       <div className="grid-item item2"></div>

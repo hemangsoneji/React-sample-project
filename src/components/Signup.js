@@ -1,7 +1,8 @@
 import React from 'react';
 import './Signup.css';
 import { useState } from "react";
-import { FormLabel, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Link } from '@mui/material';
+import { Link } from "react-router-dom";
+import { FormLabel, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField } from '@mui/material';
 
 export const Signup = () => {
   const [fname, setFname] = useState("");
@@ -18,10 +19,7 @@ export const Signup = () => {
   var regName = /^[A-Za-z]+[A-Za-z]+$/;
   var regContactNumber = /^[7-9]\d{9}$/;
   var regEmail = /^[a-zA-Z0-9.!#$%&*+/=?^_{|}]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/;
-  // var regPassword = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
   var regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-
-  // let url="Signin.js";
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -135,8 +133,8 @@ export const Signup = () => {
           ></input>
           <br></br>
           <br></br>
-          <button type="submit">Submit</button>
-          <h2>Already Signed-Up? <Link to="/Signin">Sign In</Link></h2>
+          <button type="submit">Submit <Link to="/enter"></Link></button>
+          <h2>Already Signed-Up? <Link to="/signin">Signin</Link></h2> 
         </form>
       </div>
       <div className="grid-item item2"></div>
