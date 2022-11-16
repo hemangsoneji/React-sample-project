@@ -2,6 +2,7 @@ import React from 'react';
 import './Signin.css';
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 export const Signin = () => {
   const [email, setEmail] = useState("");
@@ -9,16 +10,38 @@ export const Signin = () => {
 
   const [allEntry, setAllEntry] = useState([]);
 
+  var qs = require('qs');
+  var data = qs.stringify({
+    'email': 'hemang@gmail.com',
+    'password': 'Hemang@12345'
+  });
+  var config = {
+    method: 'post',
+    url: 'https://therecipepool.pythonanywhere.com/account/login/',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data: data
+  };
+
+  axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   var regEmail = /^[a-zA-Z0-9.!#$%&*+/=?^_{|}]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/;
   var regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
   const submitForm = (e) => {
     e.preventDefault();
-    if(email.trim() === "" || email.trim() == null || !regEmail.test(email)){
+    if (email.trim() === "" || email.trim() == null || !regEmail.test(email)) {
       alert("Please enter email correctly.")
     }
     else if (password.trim() === "" || password.trim() == null || password.trim().length < 8 ||
-    !regPassword.test(password)){
+      !regPassword.test(password)) {
       alert("Please enter password correctly.");
     }
     else {
@@ -27,23 +50,24 @@ export const Signin = () => {
       console.log(allEntry);
     }
   }
+
   return (
     <div>
       <div className="grid-item item1"></div>
       <div className="grid-item logininfo1">
-        <form action="" onSubmit={submitForm}>
+        <form onSubmit={submitForm}>
           <h1>Sign In</h1>
           <label htmlFor="email">Email:*</label><br></br>
           <input type="text" id="email" autoComplete="off" placeholder="email"
-           value={email}
-           onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           ></input>
           <br></br>
           <br></br>
           <label htmlFor="password">Password:*</label><br></br>
           <input type="password" id="password" autoComplete="off" placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           ></input>
           <br></br>
           <br></br>

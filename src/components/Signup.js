@@ -3,6 +3,7 @@ import './Signup.css';
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FormLabel, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField } from '@mui/material';
+import axios from 'axios';
 
 export const Signup = () => {
   const [fname, setFname] = useState("");
@@ -15,6 +16,33 @@ export const Signup = () => {
   const [birthDate, setBirthDate] = useState("");
 
   const [allEntry, setAllEntry] = useState([]);
+
+  var qs = require('qs');
+  var data = qs.stringify({
+    'email': 'hemangsoneji@gmail.com',
+    'password': 'Hemang@12345',
+    'lastname': 'soneji',
+    'firstname': 'hemang',
+    'phone_number': '8655240076',
+    'gender': 'Male'
+  });
+  var config = {
+    method: 'post',
+    url: 'https://therecipepool.pythonanywhere.com/account/signup/',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data: data
+  };
+
+  axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
 
   var regName = /^[A-Za-z]+[A-Za-z]+$/;
   var regContactNumber = /^[7-9]\d{9}$/;
@@ -51,11 +79,12 @@ export const Signup = () => {
       return false;
     }
     else {
-      const newEntry = { id: new Date().getTime().toString(), fname, lname, email, contactNumber, password, cpassword };
+      const newEntry = { id: new Date().getTime().toString(), fname, lname, email, contactNumber, password, cpassword, gender, birthDate };
       setAllEntry([...allEntry, newEntry]);
       console.log(allEntry);
     }
   }
+
   return (
     <div>
       <div className="grid-item item1"></div>
@@ -67,6 +96,15 @@ export const Signup = () => {
             value={fname}
             onChange={(e) => setFname(e.target.value)}
           ></input>
+          {/* <TextField
+          id="fname"
+          label="First Name:*"
+          placeholder="first name"
+          autoFocus
+          value={fname}
+          nChange={(e) => setFname(e.target.value)}
+          autoComplete="off"
+        /> */}
           <br></br>
           <br></br>
           <label htmlFor="name">Last Name:*</label><br></br>
@@ -134,7 +172,7 @@ export const Signup = () => {
           <br></br>
           <br></br>
           <button type="submit">Submit <Link to="/enter"></Link></button>
-          <h2>Already Signed-Up? <Link to="/signin">Signin</Link></h2> 
+          <h2>Already Signed-Up? <Link to="/signin">Signin</Link></h2>
         </form>
       </div>
       <div className="grid-item item2"></div>
