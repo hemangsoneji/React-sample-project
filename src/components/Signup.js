@@ -2,7 +2,7 @@ import React from 'react';
 import './Signup.css';
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FormLabel, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField } from '@mui/material';
+import { FormLabel, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Button, Box, Grid } from '@mui/material';
 import axios from 'axios';
 
 export const Signup = () => {
@@ -86,115 +86,137 @@ export const Signup = () => {
   }
 
   return (
-    <div>
-      <div className="grid-item item1"></div>
-      <div className="grid-item logininfo">
-        <h2>User Sign-Up Page</h2>
-        <form onSubmit={submitForm}>
-          <label htmlFor="name">First Name:*</label><br></br>
-          <input type="text" id="fname" autoComplete="off" placeholder="first name" autoFocus
-            value={fname}
-            onChange={(e) => setFname(e.target.value)}
-          ></input>
-          {/* <TextField
-          id="fname"
-          label="First Name:*"
-          placeholder="first name"
-          autoFocus
-          value={fname}
-          nChange={(e) => setFname(e.target.value)}
-          autoComplete="off"
-        /> */}
-          <br></br>
-          <br></br>
-          <label htmlFor="name">Last Name:*</label><br></br>
-          <input type="text" id="lname" autoComplete="off" placeholder="last name"
-            value={lname}
-            onChange={(e) => setLname(e.target.value)}
-          ></input>
-          <br></br>
-          <br></br>
-          <label htmlFor="email">Email:*</label><br></br>
-          <input type="text" id="email" autoComplete="off" placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
-          <br></br>
-          <br></br>
-          <label htmlFor="contactNumber">Contact Number:*</label><br></br>
-          <input type="text" id="number" autoComplete="off" placeholder="contact number"
-            value={contactNumber}
-            onChange={(e) => setContactNumber(e.target.value)}
-          ></input>
-          <br></br>
-          <br></br>
-          <FormControl>
-            <FormLabel id="gender">Gender</FormLabel>
-            <RadioGroup
-              name="gender"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            >
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel value="female" control={<Radio />} label="Female" />
-              <FormControlLabel value="other" control={<Radio />} label="Other" />
-            </RadioGroup>
-          </FormControl>
-          <br></br>
-          <br></br>
-          <Stack component="form" noValidate spacing={3} />
-          <TextField
-            id="birthDate"
-            label="Birth Date*"
-            type="date"
-            value={birthDate}
-            onChange={(e) => setBirthDate(e.target.value)}
-            defaultValue="2022-11-08"
-            sx={{ width: 220 }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <br></br>
-          <br></br>
-          <label htmlFor="password">Password:*</label><br></br>
-          <input type="password" id="password" autoComplete="off" placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-          <br></br>
-          <br></br>
-          <label htmlFor="cpassword">Confirm Password:*</label><br></br>
-          <input type="password" id="cpassword" autoComplete="off" placeholder="confirm password"
-            value={cpassword}
-            onChange={(e) => setCpassword(e.target.value)}
-          ></input>
-          <br></br>
-          <br></br>
-          <button type="submit">Submit <Link to="/enter"></Link></button>
-          <h2>Already Signed-Up? <Link to="/signin">Signin</Link></h2>
-        </form>
-      </div>
-      <div className="grid-item item2"></div>
-      {/* <div>
-        {
-          allEntry.map((data) => {
-            const { id, name, email, contactNumber, gender, password, cpassword } = data;
-            return (
-              <div className="showDataStyle" key={id}>
-                <p>{name}</p>
-                <p>{email}</p>
-                <p>{contactNumber}</p>
-                <p>{gender}</p>
-                <p>{password}</p>
-                <p>{cpassword}</p>
-              </div>
-            )
-          })
-        }
-      </div> */}
-    </div>
+    <Box
+      component="span"
+      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+    >
+      <Grid container spacing={3}>
+        <Grid xs></Grid>
+        <Grid xs={60}>
+          <h2>User Sign-Up Page</h2>
+          <form onSubmit={submitForm}>
+            <TextField
+              id="fname"
+              label="First Name:*"
+              type="search"
+              autoComplete="off"
+              autoFocus
+              value={fname}
+              onChange={(e) => setFname(e.target.value)}
+            />
+            <br></br>
+            <br></br>
+            <TextField
+              id="lname"
+              label="Last Name:*"
+              type="search"
+              autoComplete="off"
+              autoFocus
+              value={lname}
+              onChange={(e) => setLname(e.target.value)}
+            />
+            <br></br>
+            <br></br>
+            <TextField
+              id="email"
+              label="Email:*"
+              type="search"
+              autoComplete="off"
+              autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <br></br>
+            <br></br>
+            <TextField
+              id="number"
+              label="Contact Number:*"
+              type="search"
+              autoComplete="off"
+              autoFocus
+              value={contactNumber}
+              onChange={(e) => setContactNumber(e.target.value)}
+            />
+            <br></br>
+            <br></br>
+            <FormControl>
+              <FormLabel id="gender">Gender</FormLabel>
+              <RadioGroup
+                name="gender"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <FormControlLabel value="male" control={<Radio />} label="Male" />
+                <FormControlLabel value="female" control={<Radio />} label="Female" />
+                <FormControlLabel value="other" control={<Radio />} label="Other" />
+              </RadioGroup>
+            </FormControl>
+            <br></br>
+            <br></br>
+            <Stack component="form" noValidate spacing={3} />
+            <TextField
+              id="birthDate"
+              label="Birth Date*"
+              type="date"
+              value={birthDate}
+              onChange={(e) => setBirthDate(e.target.value)}
+              defaultValue="2022-11-08"
+              sx={{ width: 220 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <br></br>
+            <br></br>
+            <TextField
+              id="password"
+              label="Password:*"
+              type="password"
+              autoComplete="off"
+              autoFocus
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <br></br>
+            <br></br>
+            <TextField
+              id="cpassword"
+              label="Confirm Password:*"
+              type="password"
+              autoComplete="off"
+              autoFocus
+              value={cpassword}
+              onChange={(e) => setCpassword(e.target.value)}
+            />
+            <br></br>
+            <br></br>
+            <Button variant="contained" type="submit">Submit <Link to="/enter"></Link></Button>
+            <h2>Already Signed-Up? <Link to="/">Signin</Link></h2>
+          </form>
+        </Grid>
+        <Grid xs></Grid>
+      </Grid>
+    </Box >
   )
 }
+//  <div>
+//       // to display the data
+//         {
+//           allEntry.map((data) => {
+//             const { id, name, email, contactNumber, gender, password, cpassword } = data;
+//             return (
+//               <div className="showDataStyle" key={id}>
+//                 <p>{name}</p>
+//                 <p>{email}</p>
+//                 <p>{contactNumber}</p>
+//                 <p>{gender}</p>
+//                 <p>{password}</p>
+//                 <p>{cpassword}</p>
+//               </div>
+//             )
+//           })
+//         }
+//       </div> 
+
 
 export default Signup;

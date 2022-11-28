@@ -9,15 +9,15 @@ import Enter from "./components/Enter";
 
 function App() {
   return (
-    
+
     <Router>
       <div className="App">
         <Switch>
           <Route exact path="/">
-            <Signup />
-          </Route>
-          <Route path="/signin">
             <Signin />
+          </Route>
+          <Route path="/signup">
+            <Signup />
           </Route>
           <Route path="/enter">
             <Enter />
