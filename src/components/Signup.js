@@ -19,12 +19,13 @@ export const Signup = () => {
 
   var qs = require('qs');
   var data = qs.stringify({
-    'email': 'hemangsoneji@gmail.com',
-    'password': 'Hemang@12345',
-    'lastname': 'soneji',
-    'firstname': 'hemang',
-    'phone_number': '8655240076',
-    'gender': 'Male'
+    
+    'email': email,
+    'password': password,
+    'lastname': lname,
+    'firstname': fname,
+    'phone_number': contactNumber,
+    'gender': gender
   });
   var config = {
     method: 'post',
@@ -42,7 +43,12 @@ export const Signup = () => {
     .catch(function (error) {
       console.log(error);
     });
-
+// 'email': 'hemangsoneji@gmail.com',
+    // 'password': 'Hemang@12345',
+    // 'lastname': 'soneji',
+    // 'firstname': 'hemang',
+    // 'phone_number': '8655240076',
+    // 'gender': 'Male'
 
   var regName = /^[A-Za-z]+[A-Za-z]+$/;
   var regContactNumber = /^[7-9]\d{9}$/;

@@ -13,8 +13,8 @@ export const Signin = () => {
 
   var qs = require('qs');
   var data = qs.stringify({
-    'email': 'hemang@gmail.com',
-    'password': 'Hemang@12345'
+    'email': email,
+    'password': password
   });
   var config = {
     method: 'post',
@@ -27,35 +27,48 @@ export const Signin = () => {
 
   axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
+      const a = response.data;
+      const b = JSON.stringify(response.data);
+      console.log(a);
+      localStorage.setItem('rt', a.refresh_token);
+      localStorage.setItem('at', a.access_token);
+      ref();
+      // console.log(JSON.stringify(response.data));
     })
     .catch(function (error) {
       console.log(error);
     });
-  
-    // var axios = require('axios');
-    var qs1 = require('qs');
-    var data1 = qs1.stringify({
-      'refresh': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2OTIyMjExOSwiaWF0IjoxNjY4NjE3MzE5LCJqdGkiOiI1Zjg5MmFlYzdkYTA0MzkwODM3NGM4YTY5NzQxMmM0MCIsInVzZXJfaWQiOjM4fQ.mB0pkot17XV2Cri0AKR-QfNErk6MGLokY8MOa1RrdWE\n' 
+
+  const ref = () => {
+    var qs = require('qs');
+    var data = qs.stringify({
+      // 'refresh': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2OTIyMjExOSwiaWF0IjoxNjY4NjE3MzE5LCJqdGkiOiI1Zjg5MmFlYzdkYTA0MzkwODM3NGM4YTY5NzQxMmM0MCIsInVzZXJfaWQiOjM4fQ.mB0pkot17XV2Cri0AKR-QfNErk6MGLokY8MOa1RrdWE\n' 
+      'refresh': localStorage.getItem("refresh_token")
     });
-    var config1 = {
+    var config = {
       method: 'post',
       url: 'https://therecipepool.pythonanywhere.com/account/token-refresh/',
-      headers: { 
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY4ODc2NTE5LCJpYXQiOjE2Njg2MTczMTksImp0aSI6IjU3OGM2MWY0OGJiYzQ3MDA5YzBiNjZmOWRiNzJkZjA3IiwidXNlcl9pZCI6Mzh9.GzbUdRyS7Pq3McOruNPUZOb9BSlj9Ep2VZu32ilpgRk', 
+      headers: {
+        // 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY4ODc2NTE5LCJpYXQiOjE2Njg2MTczMTksImp0aSI6IjU3OGM2MWY0OGJiYzQ3MDA5YzBiNjZmOWRiNzJkZjA3IiwidXNlcl9pZCI6Mzh9.GzbUdRyS7Pq3McOruNPUZOb9BSlj9Ep2VZu32ilpgRk', 
+        'Authorization': localStorage.getItem("access_token"),
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      data1 : data1
+      data: data
     };
-    
-    axios(config1)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-      
+
+    axios(config)
+      .then(function (response) {
+        const a = response.data;
+        console.log(JSON.stringify(response.data));
+        // setSucc("Logged in.");
+        localStorage.setItem('rt',a.refresh_token);
+        localStorage.setItem('at',a.access_token);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   var regEmail = /^[a-zA-Z0-9.!#$%&*+/=?^_{|}]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/;
   var regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
