@@ -2,7 +2,7 @@ import React from 'react';
 import './Signup.css';
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FormLabel, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Button, Box, Grid } from '@mui/material';
+import { FormLabel, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Button, Box, Grid, Card, CardContent } from '@mui/material';
 import axios from 'axios';
 
 export const Signup = () => {
@@ -17,38 +17,38 @@ export const Signup = () => {
 
   const [allEntry, setAllEntry] = useState([]);
 
-  var qs = require('qs');
-  var data = qs.stringify({
-    
-    'email': email,
-    'password': password,
-    'lastname': lname,
-    'firstname': fname,
-    'phone_number': contactNumber,
-    'gender': gender
-  });
-  var config = {
-    method: 'post',
-    url: 'https://therecipepool.pythonanywhere.com/account/signup/',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    data: data
-  };
+  const api = () => {
+    console.log("Clicked on submit");
+    var qs = require('qs');
+    var data = qs.stringify({
 
-  axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      console.log(error);
+      'email': email,
+      'password': password,
+      'lastname': lname,
+      'firstname': fname,
+      'phone_number': contactNumber,
+      'gender': gender
     });
-// 'email': 'hemangsoneji@gmail.com',
-    // 'password': 'Hemang@12345',
-    // 'lastname': 'soneji',
-    // 'firstname': 'hemang',
-    // 'phone_number': '8655240076',
-    // 'gender': 'Male'
+    var config = {
+      method: 'post',
+      url: 'https://therecipepool.pythonanywhere.com/account/signup/',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        // JSON.stringify
+        alert("successfully logged in");
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert(error);
+      });
+  }
 
   var regName = /^[A-Za-z]+[A-Za-z]+$/;
   var regContactNumber = /^[7-9]\d{9}$/;
@@ -88,8 +88,16 @@ export const Signup = () => {
       const newEntry = { id: new Date().getTime().toString(), fname, lname, email, contactNumber, password, cpassword, gender, birthDate };
       setAllEntry([...allEntry, newEntry]);
       console.log(allEntry);
+      api();
     }
   }
+
+  <Box
+    component="span"
+    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+  >
+    •
+  </Box>
 
   return (
     <Box
@@ -97,110 +105,114 @@ export const Signup = () => {
       sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
     >
       <Grid container spacing={3}>
-        <Grid xs></Grid>
-        <Grid xs={60}>
-          <h2>User Sign-Up Page</h2>
-          <form onSubmit={submitForm}>
-            <TextField
-              id="fname"
-              label="First Name:*"
-              type="search"
-              autoComplete="off"
-              autoFocus
-              value={fname}
-              onChange={(e) => setFname(e.target.value)}
-            />
-            <br></br>
-            <br></br>
-            <TextField
-              id="lname"
-              label="Last Name:*"
-              type="search"
-              autoComplete="off"
-              autoFocus
-              value={lname}
-              onChange={(e) => setLname(e.target.value)}
-            />
-            <br></br>
-            <br></br>
-            <TextField
-              id="email"
-              label="Email:*"
-              type="search"
-              autoComplete="off"
-              autoFocus
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <br></br>
-            <br></br>
-            <TextField
-              id="number"
-              label="Contact Number:*"
-              type="search"
-              autoComplete="off"
-              autoFocus
-              value={contactNumber}
-              onChange={(e) => setContactNumber(e.target.value)}
-            />
-            <br></br>
-            <br></br>
-            <FormControl>
-              <FormLabel id="gender">Gender</FormLabel>
-              <RadioGroup
-                name="gender"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-              >
-                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                <FormControlLabel value="other" control={<Radio />} label="Other" />
-              </RadioGroup>
-            </FormControl>
-            <br></br>
-            <br></br>
-            <Stack component="form" noValidate spacing={3} />
-            <TextField
-              id="birthDate"
-              label="Birth Date*"
-              type="date"
-              value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value)}
-              defaultValue="2022-11-08"
-              sx={{ width: 220 }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <br></br>
-            <br></br>
-            <TextField
-              id="password"
-              label="Password:*"
-              type="password"
-              autoComplete="off"
-              autoFocus
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <br></br>
-            <br></br>
-            <TextField
-              id="cpassword"
-              label="Confirm Password:*"
-              type="password"
-              autoComplete="off"
-              autoFocus
-              value={cpassword}
-              onChange={(e) => setCpassword(e.target.value)}
-            />
-            <br></br>
-            <br></br>
-            <Button variant="contained" type="submit">Submit <Link to="/enter"></Link></Button>
-            <h2>Already Signed-Up? <Link to="/">Signin</Link></h2>
-          </form>
+        <Grid></Grid>
+        <Grid>
+          <Card sx={{ minWidth: 275 }}>
+            <CardContent>
+              <h2>User Sign-Up Page</h2>
+              <form>
+                <TextField
+                  id="fname"
+                  label="First Name:*"
+                  type="search"
+                  autoComplete="off"
+                  autoFocus
+                  value={fname}
+                  onChange={(e) => setFname(e.target.value)}
+                />
+                <br></br>
+                <br></br>
+                <TextField
+                  id="lname"
+                  label="Last Name:*"
+                  type="search"
+                  autoComplete="off"
+                  // autoFocus
+                  value={lname}
+                  onChange={(e) => setLname(e.target.value)}
+                />
+                <br></br>
+                <br></br>
+                <TextField
+                  id="email"
+                  label="Email:*"
+                  type="search"
+                  autoComplete="off"
+                  // autoFocus
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <br></br>
+                <br></br>
+                <TextField
+                  id="number"
+                  label="Contact Number:*"
+                  type="search"
+                  autoComplete="off"
+                  // autoFocus
+                  value={contactNumber}
+                  onChange={(e) => setContactNumber(e.target.value)}
+                />
+                <br></br>
+                <br></br>
+                <FormControl>
+                  <FormLabel id="gender">Gender*</FormLabel>
+                  <RadioGroup
+                    name="gender"
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    <FormControlLabel value="male" control={<Radio />} label="Male" />
+                    <FormControlLabel value="female" control={<Radio />} label="Female" />
+                    <FormControlLabel value="other" control={<Radio />} label="Other" />
+                  </RadioGroup>
+                </FormControl>
+                <br></br>
+                <br></br>
+                <Stack component="form" noValidate spacing={3} />
+                <TextField
+                  id="birthDate"
+                  label="Birth Date*"
+                  type="date"
+                  value={birthDate}
+                  onChange={(e) => setBirthDate(e.target.value)}
+                  defaultValue="2022-11-08"
+                  sx={{ width: 220 }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                <br></br>
+                <br></br>
+                <TextField
+                  id="password"
+                  label="Password:*"
+                  type="password"
+                  autoComplete="off"
+                  // autoFocus
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <br></br>
+                <br></br>
+                <TextField
+                  id="cpassword"
+                  label="Confirm Password:*"
+                  type="password"
+                  autoComplete="off"
+                  // autoFocus
+                  value={cpassword}
+                  onChange={(e) => setCpassword(e.target.value)}
+                />
+                <br></br>
+                <br></br>
+                <Button variant="contained" type="submit" onClick={submitForm}>Submit <Link to="/enter"></Link></Button>
+                <h2>Already Signed-Up? <Link to="/">Signin</Link></h2>
+              </form>
+            </CardContent>
+          </Card>
         </Grid>
-        <Grid xs></Grid>
+        <Grid></Grid>
       </Grid>
     </Box >
   )

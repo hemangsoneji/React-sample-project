@@ -4,6 +4,7 @@ import Signup from "./components/Signup";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Signin from "./components/Signin";
 import Enter from "./components/Enter";
+import Home from "./components/Home";
 // import axiosInstance from "./components/Access";
 // import axios from 'axios';
 
@@ -21,6 +22,9 @@ function App() {
           </Route>
           <Route path="/enter">
             <Enter />
+          </Route>
+          <Route path = "/home">
+            <Home />
           </Route>
         </Switch>
       </div>
