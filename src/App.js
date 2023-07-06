@@ -1,30 +1,37 @@
 import './App.css';
 import React from 'react';
-import Signup from "./components/Signup";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Signin from "./components/Signin";
-import Enter from "./components/Enter";
-import Home from "./components/Home";
+import HomePage from './components/HomePage';
+import AboutPage from './components/AboutPage';
+import ContactPage from './components/ContactPage';
+import TodoList from './components/TodoList';
+import ShoppingCart from './components/ShoppingCart';
+import UserTodo from './components/UserTodo';
 // import axiosInstance from "./components/Access";
 // import axios from 'axios';
 
 function App() {
   return (
-
     <Router>
       <div className="App">
         <Switch>
           <Route exact path="/">
-            <Signin />
+            <HomePage />
           </Route>
-          <Route path="/signup">
-            <Signup />
+          <Route path="/about">
+            <AboutPage />
           </Route>
-          <Route path="/enter">
-            <Enter />
+          <Route path="/contact">
+            <ContactPage />
           </Route>
-          <Route path = "/home">
-            <Home />
+          <Route path="/todolist">
+            <TodoList />
+          </Route>
+          <Route path="/peruser">
+            <UserTodo />
+          </Route>
+          <Route path="/shoppingcart">
+            <ShoppingCart />
           </Route>
         </Switch>
       </div>
